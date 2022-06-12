@@ -1,11 +1,11 @@
 <?php
     class PageHandler{
         public static function getHomePage(){
-            return file_get_contents('./index1.php');
+            return file_get_contents('./indexMain.php');
         }
 
         public static function getLoggedInPage($userEmail){
-            return file_get_contents('./index2.php');
+            return file_get_contents('./indexLoggedIn.php');
         }
     }
 ?>
