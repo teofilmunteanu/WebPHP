@@ -1,4 +1,5 @@
 <?php
+    session_start();
     class PageHandler{
         public static function getHomePage(){
             return file_get_contents('./indexMain.php');
@@ -17,8 +18,13 @@
     
     <body>
         <?php 
-        if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
-            echo PageHandler::getLoggedInPage($_COOKIE['email']);
+        
+        require_once 'securityHandler.php';
+        
+        if(isset($_COOKIE['email']) && isset($_COOKIE['token'])){
+            if(isset($_SESSION['email']) || checkUserToken($_COOKIE['email'], $_COOKIE['token'])){
+                echo PageHandler::getLoggedInPage($_COOKIE['email']);
+            } 
         } else{
             echo PageHandler::getHomePage();
         }

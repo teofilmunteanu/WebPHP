@@ -1,20 +1,21 @@
 
 <?php
-//TO MODIFY
+require_once "connection.php";
 
-/*
-@include 'config.php';
+if(isset($_COOKIE['email']) && isset($_COOKIE['token'])){
+    $email = $_COOKIE['email'];
+    $token = $_COOKIE['token'];
+    $sql="DELETE FROM usertokens WHERE email='$email' AND token='$token'";
+    $query= mysqli_query($con, $sql)or die(mysqli_error($con));
+    unset($_COOKIE['email']);
+    unset($_COOKIE['token']);
+    setcookie('email', '', time() - 3600);
+    setcookie('token', '', time() - 3600);
+}
+
 session_start();
 session_unset();
-session_destroy();*/
-
-//$cookie_name1='email';
-//$cookie_name2='password';
-unset($_COOKIE['email']);
-unset($_COOKIE['password']);
-setcookie('email', '', time() - 3600);
-setcookie('password', '', time() - 3600);
-
+session_destroy();
 header('location:index.php');
 
 ?>

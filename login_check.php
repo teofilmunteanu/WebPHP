@@ -1,5 +1,6 @@
 <?php
-@include 'connection.php';
+require_once 'connection.php';
+require_once 'securityHandler.php';
 session_start();
 $table="users";
 $message="";
@@ -8,21 +9,23 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
     if(($_POST['email'] != "")&& ($_POST['password'] != "")){
         $email = $_POST['email'];
         $pass = $_POST['password'];
-        $query = "SELECT * FROM $table WHERE email='$email' and password='$pass'";
+        $query = "SELECT * FROM $table WHERE email='$email' AND password='$pass'";
         $result=mysqli_query($con, $query);
         
         if(mysqli_num_rows($result) == 1){
             if(isset($_POST['rememberMe'])){
-                /* set cookie to last 1 year */
-                setcookie('email', $_POST['email'], time()+60*60*24*365);
-                setcookie('password', md5($_POST['password']), time()+60*60*24*365);
+                addToken($email);
+                //setcookie('email', $_POST['email'], time()+60*60*24*365);
+                //setcookie('password', md5($_POST['password']), time()+60*60*24*365);
             }
             else {
                 /* Cookie expires when browser closes */
                 setcookie('email', $_POST['email'], false);
-                setcookie('password', md5($_POST['password']), false);
+                setcookie('token', generateToken(), false);  
             }
             
+            $_SESSION['email'] = $email;
+            echo $_SESSION['email'];
             header('location: index.php');    
         }
         else{
@@ -37,7 +40,12 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
 }
 else{
     $message = "Incorrect captcha";
+
     header('location: login.php');
+}
+
+if($message == ""){
+    $message = "Something went wrong";
 }
 $_SESSION['message'] = $message;
 
