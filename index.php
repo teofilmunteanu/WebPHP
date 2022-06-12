@@ -16,7 +16,6 @@
     </head>
     
     <body>
-        <h2>Hello</h2>
         <?php 
         if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
             echo PageHandler::getLoggedInPage($_COOKIE['email']);

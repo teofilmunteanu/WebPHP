@@ -1,3 +1,29 @@
+<?php
+    function generateCaptcha($path)
+    {
+        $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $captchaString = "";
+        $captchaLength = 5;
+
+        for($i = 0; $i < $captchaLength; $i++){
+            $captchaString .= $characters[rand(0, strlen($characters)-1)];
+        }
+
+        $im = imagecreatetruecolor(100, 50);
+
+        $right = 10; $top = 35; $fontSize = 20; $spacing = 15;
+        for($i = 0; $i < $captchaLength; $i++){
+            imagettftext($im, $fontSize, rand(-15, 15), $right + $i * $spacing, $top, 
+                imagecolorallocate($im, rand(10, 255), rand(10, 255), rand(10, 255)), 
+                'assets/RobotoCondensed-Bold.ttf', $captchaString[$i]);
+
+            imagepng($im, $path);
+        }
+        
+        return $path;
+    }
+?>
+
 <html>
     <head>
         <title>User Login</title>
@@ -10,6 +36,8 @@
             Remember me: <input type="checkbox" name="rememberMe" value="1"><br/>
             <input type="submit" name="submit" value="Log In">
         </form>
+
+        <img src = <?php echo generateCaptcha("assets/img/captcha.png"); ?> >
     </body>
 </html>
 
