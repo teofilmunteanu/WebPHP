@@ -3,51 +3,51 @@ require_once 'connection.php';
 require_once 'securityHandler.php';
 session_start();
 $table="users";
-$message="";
+$message="Failed";
 
 if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
-    if(($_POST['email'] != "")&& ($_POST['password'] != "")){
+    if(($_POST['email'] != "") && ($_POST['password'] != "")){
         $email = $_POST['email'];
-        $pass = $_POST['password'];
+        $pass = md5($_POST['password']);
         $query = "SELECT * FROM $table WHERE email='$email' AND password='$pass'";
         $result=mysqli_query($con, $query);
         
         if(mysqli_num_rows($result) == 1){
             if(isset($_POST['rememberMe'])){
                 addToken($email);
-                //setcookie('email', $_POST['email'], time()+60*60*24*365);
-                //setcookie('password', md5($_POST['password']), time()+60*60*24*365);
             }
             else {
                 /* Cookie expires when browser closes */
                 setcookie('email', $_POST['email'], false);
                 setcookie('token', generateToken(), false);  
+                
             }
-            
+            $message = "Success";
             $_SESSION['email'] = $email;
-            echo $_SESSION['email'];
+            //echo $pass;
             header('location: index.php');    
         }
         else{
-            $message = "Username/Password Invalid.";
-            header('location: login.php');
+            $message = "Email/Password Invalid.";
         }
     }
     else{
-        $message = "You must supply a username and password.";
-        header('location: login.php');
+        $message = "You must supply an email and password.";
     }
 }
 else{
     $message = "Incorrect captcha";
-
-    header('location: login.php');
 }
 
-if($message == ""){
+if($message == "Failed"){
     $message = "Something went wrong";
 }
-$_SESSION['message'] = $message;
+
+if($message != "Success")
+{
+    $_SESSION['messageLogIn'] = $message;
+    header('location: login.php');
+}
 
 ?>
 

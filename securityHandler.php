@@ -17,8 +17,8 @@
         setcookie('email', $email, time()+$expirationAdder);
         setcookie('token', $token, time()+$expirationAdder);
         
-        $query="INSERT INTO $table(email, token, expirationDate) VALUES ('{$email}',
-        '{$token}', NOW()+00010000000000)";
+        $query="INSERT INTO $table(email, token, expirationDate) VALUES ('{$email}',"
+            . "'{$token}', NOW()+00010000000000)";
 
         $result= mysqli_query($GLOBALS['con'], $query)or die(mysqli_error($con));
     }

@@ -46,10 +46,12 @@
     $img = imagecreatetruecolor(100, 50);
     $captchaLength = 5;
     $captchaString = generateCharacters($captchaLength); 
+    
     $_SESSION['captchaString'] = $captchaString;
     
-    drawText($img, $captchaString);   
     header('Content-type: image/png');
+    
+    drawText($img, $captchaString);  
     drawLines($img);
     imagepng($img);
 ?>

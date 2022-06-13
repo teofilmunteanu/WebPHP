@@ -10,22 +10,22 @@ session_start();
         <h2>User Login</h2>
         <form name="login" method="post" action="login_check.php">
             <table>
-                <?php if(isset($_SESSION['message'])){
+                <?php if(isset($_SESSION['messageLogIn'])){
                     echo "<tr>
-                            <td style='color:red;'>".$_SESSION['message']."</td>
+                            <td colspan='2' style='color:red;'>".$_SESSION['messageLogIn']."</td>
                         </tr>";
-                    unset($_SESSION['message']);
+                    unset($_SESSION['messageLogIn']);
                 }?>
                 <tr>
                     <td colspan="2"><strong>Enter your account:</strong></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" name="email"></td>
+                    <td><input type="email" name="email"></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
-                    <td><input type="text" name="password"></td>
+                    <td><input type="password" name="password"></td>
                 </tr>
                 <tr>
                     <td>Remember me:</td>
@@ -45,10 +45,12 @@ session_start();
                 <tr>
                     <td><input type="submit" name="submit" value="Log In"></td>
                 </tr>
+                <tr>
+                    <td>Don't have an account? </td>
+                    <td><a href ='signup.php'>Sign up</a></td>
+                </tr>
             </table> 
         </form>
-        
-        <p>Don't have an account? <a href ='signup.php'>Sign up</a></p>
 
         <script src="assets/js/scripts.js"></script>
     </body>
