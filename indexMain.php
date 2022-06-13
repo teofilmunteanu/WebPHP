@@ -26,10 +26,10 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Variables CSS Files. Uncomment your preferred color scheme -->
-  <link href="assets/css2/variables-orange.css" rel="stylesheet">
+  <link href="assets/css1/variables-orange.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css2/main.css" rel="stylesheet">
+  <link href="assets/css1/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
@@ -45,8 +45,7 @@
   <header id="header" class="header fixed-top" data-scrollto-offset="0">
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
-        <h1>CaféBook<span>.</span></h1>
-      </a>
+        <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
 
       <nav id="navbar" class="navbar">
         <ul>

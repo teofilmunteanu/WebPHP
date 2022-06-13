@@ -5,13 +5,16 @@ session_start();
     <head>
         <title>Sign Up</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="assets/css/mystyles.css" rel="stylesheet" />
+        <link href="assets/css1/mystyles.css" rel="stylesheet" />
+        <link href="assets/css1/variables-orange.css" rel="stylesheet"/>
+        <link href="assets/css1/main.css" rel="stylesheet"/>
     </head>
     <body>
         <div class="wrapper">
+            <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
             <div id="formContent">
                 <h2>User Registration</h2>
-                <form name="signup" method="post" action="signup_check.php">
+                <form name="signup" method="post" action="signup_check.php" style="margin-left:5%;">
                     <table>
                         <?php if(isset($_SESSION['messageSignUp'])){
                             echo "<tr>
@@ -45,7 +48,7 @@ session_start();
                         </tr>
                         <tr>
                             <td><img src = "captcha.php" id="captcha"></td>
-                            <td><button type="button" style="font-size:24px" onclick="refreshCaptcha()">
+                            <td><button type="button" style="margin-left:2%; font-size:24px" onclick="refreshCaptcha()">
                                     <i class="fa fa-refresh"></i>
                                 </button>
                             </td>
@@ -55,11 +58,13 @@ session_start();
                             <td><input type="text" name="captchaAnswer1"></td>
                         </tr>    
                         <tr>
-                            <td colspan="2"><input type="submit" name="submit" value="Sign Up"></td>
+                            <td colspan="2" align="center"><input type="submit" name="submit" value="Sign Up"></td>
                         </tr>
                         <tr>
-                            <td>Already have an account? </td>
-                            <td><a href ='login.php'>Log In</a></td>
+                            <td colspan="2" align="center">Already have an account? </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><a href ='login.php'>Log In</a></td>
                         </tr>
                     </table> 
                 </form>

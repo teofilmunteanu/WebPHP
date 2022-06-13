@@ -30,7 +30,7 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
             $row=mysqli_fetch_array($res1);
             $_SESSION['firstName'] = $row['firstName'];
             echo $_SESSION['firstName'];
-            //header('location: index.php');    
+            header('location: index.php');    
         }
         else{
             $message = "Email/Password Invalid.";
