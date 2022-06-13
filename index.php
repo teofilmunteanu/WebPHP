@@ -29,6 +29,5 @@
             echo PageHandler::getHomePage();
         }
         ?>
-        <a href =<?php echo "http://localhost/Examen1/0index.php"?>>asdfasdf</a>
     </body>
 </html>

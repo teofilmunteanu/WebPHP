@@ -24,8 +24,13 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
             }
             $message = "Success";
             $_SESSION['email'] = $email;
-            //echo $pass;
-            header('location: index.php');    
+            
+            $nameQuery = "SELECT * FROM $table WHERE email='$email'";
+            $res1=mysqli_query($con, $nameQuery);
+            $row=mysqli_fetch_array($res1);
+            $_SESSION['firstName'] = $row['firstName'];
+            echo $_SESSION['firstName'];
+            //header('location: index.php');    
         }
         else{
             $message = "Email/Password Invalid.";

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+    //ENABLE GD
     function generateCharacters($captchaLength)
     {
         $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
