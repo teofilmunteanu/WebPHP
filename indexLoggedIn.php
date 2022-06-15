@@ -21,11 +21,18 @@ session_start();
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
   <!-- Variables CSS Files. Uncomment your preferred color scheme -->
   <link href="assets/css1/variables-orange.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css1/main.css" rel="stylesheet">
+  <link href="assets/css1/mainstyle5.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
@@ -45,20 +52,14 @@ session_start();
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li><a href="blog.html" class="active">Blog</a></li>
-            <li><a class="nav-link" href="index.html#about">Profile</a></li>
-
-          
+            <li><a class="active" href="index.php">Coffee Shops</a></li>
+            <li><a class="nav-link" href="profile.php">Profile</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle d-none"></i>
       </nav><!-- .navbar -->
-      
-        <ul>
-            <a class="btn-getstarted" href ='logout.php'>Logout</a>
-        </ul>
-      
-      
-
+      <div>
+        <a class="btn-getstarted" href="logout.php">Log Out</a>
+      </div>
     </div>
   </header><!-- End Header -->
 
@@ -268,7 +269,7 @@ session_start();
 
           </div>
 
-          
+          </div>
 
         </div>
 

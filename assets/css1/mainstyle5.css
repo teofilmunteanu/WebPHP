@@ -1,3 +1,15 @@
+
+button.btn-add{
+    color: var(--color-white);
+    display: inline-block;
+    padding: 8px 30px;
+    transition: 0.3s;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    background: var(--color-primary); 
+}
+
 /**
 * Template Name: HeroBiz - v2.1.0
 * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
@@ -11,6 +23,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
 :root {
   scroll-behavior: smooth;
 }
@@ -32,6 +45,38 @@ h1, h2, h3, h4, h5, h6 {
 h1{
   font-weight: 500;
   font-size: 2.5rem; 
+}
+
+#menuContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.btn-register, .btn-register:focus {
+  font-size: 16px;
+  color: var(--color-white);
+  background: var(--color-primary);
+  padding: 8px 23px;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-family: var(--font-secondary);
+}
+.btn-register:hover, .btn-register:focus:hover {
+  color: var(--color-white);
+  background: rgba(var(--color-primary-rgb), 0.85);
+}
+@media (max-width: 1279px) {
+  .btn-register, .btn-register:focus {
+    margin-right: 50px;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -97,7 +142,7 @@ h1{
 # Sections & Section Header
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 100px 0;
   overflow: hidden;
 }
 
@@ -210,12 +255,13 @@ section {
 # Header
 --------------------------------------------------------------*/
 .header {
+  background-color: rgba(92, 77, 66, 1);
   padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
 }
 .header.sticked {
-  background: var(--color-white);
+  background-color: rgba(92, 77, 66, 1);
   box-shadow: 0px 2px 20px rgba(var(--color-secondary-rgb), 0.1);
 }
 .header .logo img {
@@ -280,7 +326,7 @@ section {
     font-family: var(--font-secondary);
     font-size: 16px;
     font-weight: 400;
-    color: rgba(var(--color-secondary-dark-rgb), 0.7);
+    color: white;
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
@@ -1253,7 +1299,7 @@ section {
   -webkit-animation: pulsate-btn 2s;
   animation: pulsate-btn 2s;
   -webkit-animation-direction: forwards;
-  animation-direction: forwards;
+  animation-direction: normal;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
   -webkit-animation-timing-function: steps;
@@ -2160,10 +2206,15 @@ section {
 /*--------------------------------------------------------------
 # Blog Home Posts List
 --------------------------------------------------------------*/
+.blog{
+    background-color: rgba(92, 77, 66, 0.8)
+}
+
 .blog .posts-list article {
   box-shadow: 0 4px 16px rgba(var(--color-black-rgb), 0.1);
   padding: 30px;
   height: 100%;
+  background-color: bisque;
 }
 .blog .posts-list article + article {
   margin-top: 60px;
