@@ -26,24 +26,33 @@ if(strtoupper($_POST['captchaAnswer1']) == $_SESSION['captchaString']){
     if(($_POST['email'] != "") && ($_POST['password'] != "")
             && ($_POST['cpassword'] != "") && ($_POST['lastName'] != "")
             && ($_POST['firstName'] != "")){
+        $email = $_POST['email'];
+        $queryEmail = "SELECT * FROM $table WHERE email='$email'";
+        $resultEmail=mysqli_query($con, $queryEmail);
         
-        if(strlen($_POST['password'])>=6){
-            if($_POST['password'] == $_POST['cpassword']){
-                
-                $user = new User();
-                $user->setData($_POST['email'], md5($_POST['password']), $_POST['lastName'], $_POST['firstName']);
-                $query="INSERT INTO $table(email, password, lastName, firstName, userType) VALUES ('{$user->email}', '{$user->pass}', '{$user->lastName}', '{$user->firstName}', '{$user->userType}')";
-                $result=mysqli_query($con, $query);
-                $message = "Success";
-                
-                header('location: index.php');  
+        if(mysqli_num_rows($resultEmail) == 0){
+            if(strlen($_POST['password'])>=6){
+                if($_POST['password'] == $_POST['cpassword']){
+
+                    $user = new User();
+                    $user->setData($_POST['email'], md5($_POST['password']), $_POST['lastName'], $_POST['firstName']);
+                    $query="INSERT INTO $table(email, password, lastName, firstName, userType) VALUES ('{$user->email}', '{$user->pass}', '{$user->lastName}', '{$user->firstName}', '{$user->userType}')";
+                    $result=mysqli_query($con, $query);
+                    $message = "Success";
+
+                    header('location: index.php');  
+                }
+                else{
+                    $message = "Passwords must match";
+                }        
             }
             else{
-                $message = "Passwords must match";
-            }        
+                $message = "Password is too short.";
+            }
         }
-        else{
-            $message = "Password is too short.";
+        else
+        {
+            $message = "Email already used.";
         }
     }
     else{
