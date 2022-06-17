@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -20,7 +18,7 @@
         <link href="assets/css1/variables-orange.css" rel="stylesheet">
 
         <!-- Template Main CSS File -->
-        <link href="assets/css1/mainstyle5.css" rel="stylesheet">
+        <link href="assets/css1/mainstyle7.css" rel="stylesheet">
     </head>
     <body id="page-top">
         <!-- ======= Header ======= -->
@@ -43,7 +41,7 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">Start Bootstrap can help you build better websites using the Bootstrap framework! Just download a theme and start customizing, no strings attached!</p>
-                        <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+                        <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#about">Learn More</a>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ session_start();
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="assets/css1/mystyles2.css" rel="stylesheet" />
         <link href="assets/css1/variables-orange.css" rel="stylesheet"/>
-        <link href="assets/css1/mainstyle5.css" rel="stylesheet"/>
+        <link href="assets/css1/mainstyle7.css" rel="stylesheet"/>
     </head>
     <body>
         <div class="wrapper">

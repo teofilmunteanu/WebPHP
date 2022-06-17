@@ -32,7 +32,7 @@ session_start();
   <link href="assets/css1/variables-orange.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css1/mainstyle5.css" rel="stylesheet">
+  <link href="assets/css1/mainstyle7.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
