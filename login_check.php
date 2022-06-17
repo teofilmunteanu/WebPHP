@@ -24,12 +24,7 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
             }
             $message = "Success";
             $_SESSION['email'] = $email;
-            
-            $nameQuery = "SELECT * FROM $table WHERE email='$email'";
-            $res1=mysqli_query($con, $nameQuery);
-            $row=mysqli_fetch_array($res1);
-            $_SESSION['firstName'] = $row['firstName'];
-            echo $_SESSION['firstName'];
+           
             header('location: index.php');    
         }
         else{

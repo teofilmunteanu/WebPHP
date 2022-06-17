@@ -1,8 +1,17 @@
 <?php
+require_once 'connection.php';
+$table="users";
 session_start();
 
-if(!isset($_SESSION['firstName'])){
+if(!isset($_SESSION['email'])){
     header("location:index.php");
+}
+else{
+    $email = $_SESSION['email'];
+    $nameQuery = "SELECT * FROM $table WHERE email='$email'";
+    $res1=mysqli_query($con, $nameQuery);
+    $row=mysqli_fetch_array($res1);
+    $_SESSION['firstName'] = $row['firstName'];
 }
 
 ?>
