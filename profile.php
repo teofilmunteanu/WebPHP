@@ -14,6 +14,14 @@ else{
     $_SESSION['firstName'] = $row['firstName'];
 }
 
+
+if(isset($_POST['uploadTypeRadio'])){
+    $uploadTypeSelected = $_POST['uploadTypeRadio'];
+
+    $cafesSql="SELECT * FROM cafes WHERE uploadType='$uploadTypeSelected';";
+    $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +55,7 @@ else{
 
   <!-- Template Main CSS File -->
   <link href="assets/css1/mainstyle7.css" rel="stylesheet">
-
+  
   <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
   * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
@@ -61,7 +69,7 @@ else{
     <div class="profileWrapper">
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top">
-          <div class="container-fluid d-flex align-items-center justify-content-between">
+          <div class="container-fluid align-items-center d-flex justify-content-between">
 
               <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
 
@@ -78,24 +86,72 @@ else{
           </div>
         </header><!-- End Header -->
 
-        <div id="uploadCover">
-            <div id="uploadBox" class="d-flex justify-content-center">
-                <button type="button" class="btn btn-close" onclick="hideUploadMenu()" style="position: fixed; top:0; right:0;"></button>
-                <form action="uploadCafe.php" class="d-flex justify-content-center flex-column">
+        
+        <!-- Upload - Page Cover -->
+        <div id="uploadCover"></div>
+        
+        <!-- Local Cafe Upload -->
+        <div id="boxLocal" class="uploadBoxWrapper">
+            <div class="uploadBox d-flex justify-content-center">
+                <button type="button" class="btn btn-close" onclick="hideUploadMenuLocal()" style="position: fixed; top:0; right:0;"></button>
+                <form method="post" action="uploadCafe.php" enctype="multipart/form-data" class="d-flex justify-content-center flex-column">
+                    <input type="hidden" name="upload_type" value="local">
                     <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="overflow:auto; resize: none;"></textarea>
+                        <label style="color:white;">Name</label>
+                        <input class="form-control" type="text" name="cafe_name">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Location(google map embed html-optional)</label>
+                        <input class="form-control" type="text" name="cafe_location">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Description</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="250" style="overflow:auto; resize: none;"></textarea>
                     </div>
                     <br/><br/>
                     <div class="form-group">
-                        <input class="form-control" type="file" id="formFile">
+                        <label style="color:white;">Upload Photo</label>
+                        <input class="form-control" type="file" name="image">
                     </div>
                     <br/>
                     <div class="form-group">
-                        <button type="submit" class="btn" style="color:white; background-color:darkgrey;">Submit</button>
+                        <button type="submit" name="submit" class="btn" style="color:white; background-color:darkgrey;">Upload</button>
                     </div>
                 </form>
             </div>
         </div>
+        
+        <!-- Public Cafe Upload -->
+        <div id="boxPublic" class="uploadBoxWrapper">
+            <div class="uploadBox d-flex justify-content-center">
+                <button type="button" class="btn btn-close" onclick="hideUploadMenuPublic()" style="position: fixed; top:0; right:0;"></button>
+                <form method="post" action="uploadCafe.php" enctype="multipart/form-data" class="d-flex justify-content-center flex-column">
+                    <input type="hidden" name="upload_type" value="public">
+                    <div class="form-group">
+                        <label style="color:white;">Name</label>
+                        <input class="form-control" type="text" name="cafe_name">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Location(google map embed html-optional)</label>
+                        <input class="form-control" type="text" name="cafe_location">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Description</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="250" style="overflow:auto; resize: none;"></textarea>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label style="color:white;">Link to an image</label><br/>
+                        <input type="url" name="image">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn" style="color:white; background-color:darkgrey;">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
 
         <main id="main">
 
@@ -107,184 +163,130 @@ else{
 
                 <div class="col-lg-12">
 
-                  <div class="row gy-4 posts-list">
-                      <div class="col-lg-12">
-                          <article class="d-flex justify-content-center flex-column">
-                              <h1 class="title">
-                              Hello <?php echo $_SESSION['firstName']; ?>. You recommended the following cafés:
-                              </h1>
-                              <div class="read-more mt-auto align-self-end">
-                                  <button class="btn-add" onclick="showUploadMenu()">Add Café</button>
-                              </div>
-                          </article>
+                    <div class="row gy-4 posts-list">
+                        
+                        <!-- Recommendations label -->
+                        <div class="col-lg-12">
+                            <article class="d-flex justify-content-center flex-column">
+                                <h1 class="title">
+                                Hello <?php echo $_SESSION['firstName']; ?>. You recommended the following cafés:
+                                </h1>
+                                <div class="d-flex justify-content align-self-end">
+                                    <div class="read-more mt-auto">
+                                        <button class="btn-add" onclick="showUploadMenuPublic()">Add Café Publicly</button>
+                                    </div>
+                                    <div>&nbsp</div>
+                                    <div class="read-more mt-auto">
+                                        <button class="btn-add" onclick="showUploadMenuLocal()">Add Café Locally</button>
+                                    </div>
+                                </div>
+                            </article>
 
-                      </div><!-- End recommendations label -->
+                        </div>
+                        <!-- End recommendations label -->
+                        
+                        
+                        <!-- FIX THIS(nu ramane selectat ultimul ales) + mai frumos -->
+                        
+                        <?php
+                            if(isset($_POST['uploadTypeRadio'])){
+                                while($row=mysqli_fetch_array($cafesResult)){
+                        ?>
+                        <div>
+                        <p><?php if(isset($_POST['uploadTypeRadio'])) echo $row['name'];?> </p>
+                        </div>  
+                        <?php }} ?>
+                        
+                        
+                        
+                        
+                        <!-- Recommendations list -->
+                        <form id="selectUploadType" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                            <div class="d-flex justify-content">
+                                <label class="align-self-center" style="color:white; margin-right:1%;">Sort:</label> 
 
-                      <div class="col-lg-6">
-                        <article class="d-flex flex-column">
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" autocomplete="on" checked onclick="submit_form()">
+                                <label class="btn btn-secondary" for="option1">Local</label>
 
-                          <div class="post-img">
-                            <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-                          </div>
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" autocomplete="on" onclick="submit_form()">
+                                <label class="btn btn-secondary" for="option2">Public</label>
+                            </div>
+                        </form>
+                        
+                        
+                        <div id="localContent" class="row gy-4 posts-list">    
+                            <div class="col-lg-6">
+                              <article class="d-flex flex-column">
 
-                          <h2 class="title">
-                            <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                          </h2>
+                                <div class="post-img">
+                                  <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+                                </div>
 
-                          <div class="meta-top">
-                            <ul>
-                              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                            </ul>
-                          </div>
+                                <h2 class="title">
+                                  <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                                </h2>
 
-                          <div class="content">
-                            <p>
-                              Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                            </p>
-                          </div>
+                                <div class="meta-top">
+                                  <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                                  </ul>
+                                </div>
 
-                          <div class="read-more mt-auto align-self-end">
-                            <a href="blog-details.html">Read More</a>
-                          </div>
+                                <div class="content">
+                                  <p>
+                                    Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
+                                  </p>
+                                </div>
 
-                        </article>
-                      </div><!-- End post list item -->
+                                <div class="read-more mt-auto align-self-end">
+                                  <a href="blog-details.html">Read More</a>
+                                </div>
 
-                      <div class="col-lg-6">
-                        <article class="d-flex flex-column">
+                              </article>
+                            </div><!-- End post list item -->
 
-                          <div class="post-img">
-                            <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-                          </div>
+                            <div class="col-lg-6">
+                              <article class="d-flex flex-column">
 
-                          <h2 class="title">
-                            <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
-                          </h2>
+                                <div class="post-img">
+                                  <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+                                </div>
 
-                          <div class="meta-top">
-                            <ul>
-                              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                            </ul>
-                          </div>
+                                <h2 class="title">
+                                  <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
+                                </h2>
 
-                          <div class="content">
-                            <p>
-                              Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
-                            </p>
-                          </div>
+                                <div class="meta-top">
+                                  <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                                  </ul>
+                                </div>
 
-                          <div class="read-more mt-auto align-self-end">
-                            <a href="blog-details.html">Read More</a>
-                          </div>
+                                <div class="content">
+                                  <p>
+                                    Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
+                                  </p>
+                                </div>
 
-                        </article>
-                      </div><!-- End post list item -->
+                                <div class="read-more mt-auto align-self-end">
+                                  <a href="blog-details.html">Read More</a>
+                                </div>
 
-                      <div class="col-lg-6">
-                        <article class="d-flex flex-column">
+                              </article>
+                            </div><!-- End post list item -->
+                            
+                            
+                        </div>
 
-                          <div class="post-img">
-                            <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-                          </div>
-
-                          <h2 class="title">
-                            <a href="blog-details.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
-                          </h2>
-
-                          <div class="meta-top">
-                            <ul>
-                              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="content">
-                            <p>
-                              Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
-                            </p>
-                          </div>
-
-                          <div class="read-more mt-auto align-self-end">
-                            <a href="blog-details.html">Read More</a>
-                          </div>
-
-                        </article>
-                      </div><!-- End post list item -->
-
-                      <div class="col-lg-6">
-                        <article class="d-flex flex-column">
-
-                          <div class="post-img">
-                            <img src="assets/img/blog/blog-5.jpg" alt="" class="img-fluid">
-                          </div>
-
-                          <h2 class="title">
-                            <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
-                          </h2>
-
-                          <div class="meta-top">
-                            <ul>
-                              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="content">
-                            <p>
-                              In itaque assumenda aliquam voluptatem qui temporibus iusto nisi quia. Autem vitae quas aperiam nesciunt mollitia tempora odio omnis. Ipsa odit sit ut amet necessitatibus. Quo ullam ut corrupti autem consequuntur totam dolorem.
-                            </p>
-                          </div>
-
-                          <div class="read-more mt-auto align-self-end">
-                            <a href="blog-details.html">Read More</a>
-                          </div>
-
-                        </article>
-                      </div><!-- End post list item -->
-
-                      <div class="col-lg-6">
-                        <article class="d-flex flex-column">
-
-                          <div class="post-img">
-                            <img src="assets/img/blog/blog-6.jpg" alt="" class="img-fluid">
-                          </div>
-
-                          <h2 class="title">
-                            <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
-                          </h2>
-
-                          <div class="meta-top">
-                            <ul>
-                              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="content">
-                            <p>
-                              Expedita et temporibus eligendi enim molestiae est architecto praesentium dolores. Illo laboriosam officiis quis. Labore officia quia sit voluptatem nisi est dignissimos totam. Et voluptate et consectetur voluptatem id dolor magni impedit. Omnis dolores sit.
-                            </p>
-                          </div>
-
-                          <div class="read-more mt-auto align-self-end">
-                            <a href="blog-details.html">Read More</a>
-                          </div>
-
-                        </article>
-                      </div><!-- End post list item -->
+                    </div>
 
                 </div>
 
                 </div>
-
-              </div>
 
             </div>
           </section><!-- End Blog Section -->
@@ -309,6 +311,7 @@ else{
     <script src="assets/js/main.js"></script>
 
     <script src="assets/js/scripts.js"></script>
+
 </body>
 
 </html>
