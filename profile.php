@@ -223,7 +223,7 @@ if(isset($_GET['content_type'])){
                                 </div>
 
                                 <h2 class="title">
-                                  <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                                  <a href="blog-details.html"><?php echo $row['name']; ?></a>
                                 </h2>
 
                                 <div class="meta-top">
@@ -236,7 +236,7 @@ if(isset($_GET['content_type'])){
 
                                 <div class="content">
                                   <p>
-                                    Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
+                                    <?php echo $row['description']; ?>
                                   </p>
                                 </div>
 
