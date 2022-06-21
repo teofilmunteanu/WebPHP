@@ -20,18 +20,19 @@
         <?php 
         
         require_once 'securityHandler.php';
-        
-        if(isset($_COOKIE['email']) && isset($_COOKIE['token'])){
-            if(isset($_SESSION['email']) || checkUserToken($_COOKIE['email'], $_COOKIE['token'])){
-                if(!isset($_SESSION['email']))
-                {
-                    $_SESSION['email'] = $_COOKIE['email'];
-                }
+
+        if(isset($_SESSION['email'])){ 
+            echo PageHandler::getLoggedInPage($_COOKIE['email']);
+        }else if(isset($_COOKIE['email']) && isset($_COOKIE['token'])){
+            if(checkUserToken($_COOKIE['email'], $_COOKIE['token'])){
+                $_SESSION['email'] = $_COOKIE['email'];
                 echo PageHandler::getLoggedInPage($_COOKIE['email']);
-            } 
-        } else{
+            }  
+        }
+        else{
             echo PageHandler::getHomePage();
         }
+
         ?>
     </body>
 </html>

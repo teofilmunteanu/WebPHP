@@ -15,8 +15,8 @@ else{
 }
 
 
-if(isset($_POST['uploadTypeRadio'])){
-    $uploadTypeSelected = $_POST['uploadTypeRadio'];
+if(isset($_GET['content_type'])){
+    $uploadTypeSelected = $_GET['content_type'];
 
     $cafesSql="SELECT * FROM cafes WHERE uploadType='$uploadTypeSelected';";
     $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
@@ -184,37 +184,71 @@ if(isset($_POST['uploadTypeRadio'])){
 
                         </div>
                         <!-- End recommendations label -->
-                        
-                        
-                        <!-- FIX THIS(nu ramane selectat ultimul ales) + mai frumos -->
-                        
-                        <?php
-                            if(isset($_POST['uploadTypeRadio'])){
-                                while($row=mysqli_fetch_array($cafesResult)){
-                        ?>
-                        <div>
-                        <p><?php if(isset($_POST['uploadTypeRadio'])) echo $row['name'];?> </p>
-                        </div>  
-                        <?php }} ?>
-                        
-                        
-                        
+
                         
                         <!-- Recommendations list -->
-                        <form id="selectUploadType" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                        <form id="selectUploadType" method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
                             <div class="d-flex justify-content">
                                 <label class="align-self-center" style="color:white; margin-right:1%;">Sort:</label> 
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" autocomplete="on" checked onclick="submit_form()">
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" autocomplete="on" onclick="window.location = 'profile.php?content_type=local';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="local"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option1">Local</label>
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" autocomplete="on" onclick="submit_form()">
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" autocomplete="on" onclick="window.location = 'profile.php?content_type=public';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="public"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option2">Public</label>
                             </div>
                         </form>
                         
+                        <!--
+                        <? php
+                            if(isset($_GET['content_type'])){
+                                while($row=mysqli_fetch_array($cafesResult)){
+                        ?>
+                        <div>
+                        <p><? php echo $row['name'];?> </p>
+                        </div>  
+                        <? php }} ?>
+                        -->
                         
-                        <div id="localContent" class="row gy-4 posts-list">    
+                        <div id="localContent" class="row gy-4 posts-list"> 
+                            <?php
+                            if(isset($_GET['content_type'])){
+                                while($row=mysqli_fetch_array($cafesResult)){
+                            ?>
+                            <div class="col-lg-6">
+                              <article class="d-flex flex-column">
+
+                                <div class="post-img">
+                                  <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+                                </div>
+
+                                <h2 class="title">
+                                  <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                                </h2>
+
+                                <div class="meta-top">
+                                  <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                                  </ul>
+                                </div>
+
+                                <div class="content">
+                                  <p>
+                                    Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
+                                  </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                  <a href="blog-details.html">Read More</a>
+                                </div>
+
+                              </article>
+                            </div>
+                            <?php }} ?>
+                            
+                            <!--
                             <div class="col-lg-6">
                               <article class="d-flex flex-column">
 
@@ -246,7 +280,8 @@ if(isset($_POST['uploadTypeRadio'])){
 
                               </article>
                             </div><!-- End post list item -->
-
+                            
+                            <!--
                             <div class="col-lg-6">
                               <article class="d-flex flex-column">
 

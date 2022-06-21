@@ -16,12 +16,7 @@ if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
             if(isset($_POST['rememberMe'])){
                 addToken($email);
             }
-            else {
-                /* Cookie expires when browser closes */
-                setcookie('email', $_POST['email'], false);
-                setcookie('token', generateToken(), false);  
-                
-            }
+
             $message = "Success";
             $_SESSION['email'] = $email;
            
