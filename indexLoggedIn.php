@@ -43,6 +43,9 @@ session_start();
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top" data-scrollto-offset="0">
@@ -103,13 +106,15 @@ session_start();
                   <div class="read-more mt-auto align-self-end">
                     <a href="blog-details.html">Read More</a>
                   </div>
-
+                  <div class="fb-like" data-href="http://www.example1324111.com" data-action="like" data-layout="standard" data-size="small" data-share="true"></div>
                 </article>
+                  
+                  
               </div><!-- End post list item -->
 
               <div class="col-lg-6">
                 <article class="d-flex flex-column">
-
+                    
                   <div class="post-img">
                     <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
                   </div>
