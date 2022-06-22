@@ -31,3 +31,14 @@ function hideUploadMenuPublic()
     document.getElementById("uploadCover").style.display = 'none';
     document.getElementById("boxPublic").style.display = 'none';
 }
+
+
+var idToDelete="";
+
+function selectDelete(id){
+    idToDelete = id;
+}
+
+function confirmDelete(lastContentType){
+    window.location.href = "delete.php?id="+idToDelete+"&last_content_type="+lastContentType;
+}

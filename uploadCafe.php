@@ -12,62 +12,68 @@ if(isset($_POST['submit'])){
     $desc=$_POST['cafe_description'];
     $email=$_SESSION['email'];
     
-    
-    $cafesSql="SELECT * FROM cafes WHERE name='$name' AND emailAssigned='$email';";
-    $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
-    
-    if(mysqli_num_rows($cafesResult) == 0){
-        if($uploadType == "local"){
-            if (!file_exists('./images/')) {
-                mkdir('./images', 0777, true);
-            }
-
-            $target="./images/". md5(uniqid(time())).basename($_FILES['image']['name']);
-
-            if(! move_uploaded_file($_FILES['image']['tmp_name'],$target)){
-                $msg="File not saved!";
-            }
-            
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mimetype = finfo_file($finfo, $target);
-            $fileTypes = array("jpg", "jpeg", "png", "gif");
-            $ok = false;
-            foreach($fileTypes as $ft){
-                if($mimetype == 'image/'.$ft){
-                    $ok = true;
-                }
-            }
-            if(! $ok){
-                $msg="Invalid file format!";
-            }
-        }
-        else if($uploadType == "public"){
-            $target = $_POST['image'];
-            if(substr($target, 0, 4) != "http"){
-                $msg = "Invalid URL!";
-            }
-            
-            $fileTypes = array("jpg", "jpeg", "png", "gif");
-            $ok = false;
-            foreach($fileTypes as $ft){
-                if(str_ends_with($target, $ft)){
-                    $ok = true;
-                }
-            }
-            if(! $ok){
-                $msg = "URL must point to an image! It should end in jpg/jpeg/png/gif.";
-            }
-        }
+    if($name=="" || $loc=="" || $desc==""){
+        $msg="All fields are mandatory!";
     }
     else{
-        $msg = "Caffe already added to this user!";
+        $cafesSql="SELECT * FROM cafes WHERE name='$name' AND emailAssigned='$email';";
+        $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
+
+        if(mysqli_num_rows($cafesResult) == 0){
+            if($uploadType == "local"){
+                if (!file_exists('./images/')) {
+                    mkdir('./images', 0777, true);
+                }
+
+                $target="./images/". md5(uniqid(time())).basename($_FILES['image']['name']);
+
+                if(! move_uploaded_file($_FILES['image']['tmp_name'],$target)){
+                    $msg="File not saved!";
+                }
+                else{
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mimetype = finfo_file($finfo, $target);
+                    $fileTypes = array("jpg", "jpeg", "png", "gif");
+                    $ok = false;
+                    foreach($fileTypes as $ft){
+                        if($mimetype == 'image/'.$ft){
+                            $ok = true;
+                        }
+                    }
+                    if(! $ok){
+                        $msg="Invalid file format!";
+                    }
+                }    
+            }
+            else if($uploadType == "public"){
+                $target = $_POST['image'];
+                if(substr($target, 0, 4) != "http"){
+                    $msg = "Invalid URL!";
+                }
+
+                $fileTypes = array("jpg", "jpeg", "png", "gif");
+                $ok = false;
+                foreach($fileTypes as $ft){
+                    if(str_ends_with($target, $ft)){
+                        $ok = true;
+                    }
+                }
+                if(! $ok){
+                    $msg = "URL must point to an image! It should end in jpg/jpeg/png/gif.";
+                }
+            }
+        }
+        else{
+            $msg = "Caffe already added to this user!";
+        }
     }
+    
     
     if($msg == "Saved"){
         $sql="INSERT INTO $table(name, location, description, image, uploadType, emailAssigned) VALUES('$name','$loc','$desc','$target','$uploadType', '$email')";
         mysqli_query($con,$sql);
         
-        header('location:profile.php');
+        header('location:profile.php?content_type='.$uploadType);
     }
     
 }

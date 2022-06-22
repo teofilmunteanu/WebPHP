@@ -213,12 +213,14 @@ if(isset($_GET['content_type'])){
                                 <div class="row">
                                     <div class="col">
                                       <h2 class="title">
-                                        <a href="cafe_details.php"><?php echo $row['name']; ?></a>
+                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>"><?php echo $row['name']; ?></a>
                                       </h2>
                                     </div>
                                     
                                     <div class="col">
-                                      <a class="btn btn-danger float-end" href='delete.php?id=<?php echo $row['id'];?>'>X</a>
+                                      <button type="button" id="<?php echo $row['id'];?>" onclick="selectDelete(this.id)" class="btn btn-danger float-end" data-toggle="modal" data-target="#exampleModalCenter">
+                                        X
+                                      </button>
                                     </div>
                                     
                                 </div>
@@ -322,8 +324,29 @@ if(isset($_GET['content_type'])){
                 </div>
 
             </div>
+              
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure you want to delete this cafe?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('<?php echo $_GET['content_type']; ?>')">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            
           </section><!-- End Blog Section -->
-
+          
+            
+            
         </main><!-- End #main -->
 
         <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -346,6 +369,8 @@ if(isset($_GET['content_type'])){
 
     <script src="assets/js/scripts.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
