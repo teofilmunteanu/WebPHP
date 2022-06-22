@@ -13,7 +13,7 @@
 
 <html>
     <head>
-        <title>Page1</title>
+        <title>CaféBook</title>
     </head>
     
     <body>

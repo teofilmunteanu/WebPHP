@@ -8,7 +8,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Coffee Shops</title>
+  <title>CaféBook</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@ session_start();
 
 <body>
   <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
 
 
   <!-- ======= Header ======= -->
@@ -56,15 +56,17 @@ session_start();
       <nav id="navbar" class="navbar">
         <ul>
             <li><a class="active" href="index.php">Coffee Shops</a></li>
-            <li><a class="nav-link" href="profile.php">Profile</a></li>
+            <li><a class="nav-link" href="profile.php?content_type=local">Profile</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle d-none"></i>
-      </nav><!-- .navbar -->
+      </nav>
+        
       <div>
         <a class="btn-getstarted" href="logout.php">Log Out</a>
       </div>
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
   <main id="main">
 
@@ -73,11 +75,20 @@ session_start();
       <div class="container" data-aos="fade-up">
 
         <div class="row g-5">
-
-          <div class="col-lg-12">
-
+          <div class="col-lg-12">        
             <div class="row gy-4 posts-list">
+              <!-- Social Media -->  
+              <div class="col-lg-12">
+                    <article class="d-flex justify-content-center flex-column">
+                        <h3 class="title">
+                        Enjoying CaféBook? Like and Share: 
+                        </h3>
+                        <div class="fb-like" data-href="http://www.example1324111.com" data-action="like" data-layout="standard" data-size="small" data-share="true"></div>
+                    </article>
+              </div>    
+              <!-- End Social Media -->  
 
+              
               <div class="col-lg-6">
                 <article class="d-flex flex-column">
 
@@ -106,10 +117,8 @@ session_start();
                   <div class="read-more mt-auto align-self-end">
                     <a href="blog-details.html">Read More</a>
                   </div>
-                  <div class="fb-like" data-href="http://www.example1324111.com" data-action="like" data-layout="standard" data-size="small" data-share="true"></div>
                 </article>
-                  
-                  
+                         
               </div><!-- End post list item -->
 
               <div class="col-lg-6">
@@ -281,7 +290,7 @@ session_start();
       </div>
     </section><!-- End Blog Section -->
 
-  </main><!-- End #main -->
+  </main><!-- End main -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

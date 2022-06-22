@@ -18,7 +18,7 @@ else{
 if(isset($_GET['content_type'])){
     $uploadTypeSelected = $_GET['content_type'];
 
-    $cafesSql="SELECT * FROM cafes WHERE uploadType='$uploadTypeSelected';";
+    $cafesSql="SELECT * FROM cafes WHERE uploadType='$uploadTypeSelected' AND emailAssigned='$email';";
     $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
 }
 
@@ -30,7 +30,7 @@ if(isset($_GET['content_type'])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Coffee Shops</title>
+  <title>Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -76,15 +76,17 @@ if(isset($_GET['content_type'])){
             <nav id="navbar" class="navbar">
               <ul>
                   <li><a class="nav-link" href="index.php">Coffee Shops</a></li>
-                  <li><a class="active" href="profile.php">Profile</a></li>
+                  <li><a class="active" href="profile.php?content_type=local">Profile</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle d-none"></i>
-            </nav><!-- .navbar -->
+            </nav>
+              
             <div>
               <a class="btn-getstarted" href="logout.php">Log Out</a>
             </div>
           </div>
-        </header><!-- End Header -->
+        </header>
+        <!-- End Header -->
 
         
         <!-- Upload - Page Cover -->
@@ -101,12 +103,12 @@ if(isset($_GET['content_type'])){
                         <input class="form-control" type="text" name="cafe_name">
                     </div>
                     <div class="form-group">
-                        <label style="color:white;">Location(google map embed html-optional)</label>
+                        <label style="color:white;">Location(search terms)</label>
                         <input class="form-control" type="text" name="cafe_location">
                     </div>
                     <div class="form-group">
-                        <label style="color:white;">Description</label>
-                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="250" style="overflow:auto; resize: none;"></textarea>
+                        <label style="color:white;">Description(max 1000 characters)</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="1000" style="overflow:auto; resize: none;"></textarea>
                     </div>
                     <br/><br/>
                     <div class="form-group">
@@ -132,12 +134,12 @@ if(isset($_GET['content_type'])){
                         <input class="form-control" type="text" name="cafe_name">
                     </div>
                     <div class="form-group">
-                        <label style="color:white;">Location(google map embed html-optional)</label>
+                        <label style="color:white;">Location(search terms)</label>
                         <input class="form-control" type="text" name="cafe_location">
                     </div>
                     <div class="form-group">
-                        <label style="color:white;">Description</label>
-                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="250" style="overflow:auto; resize: none;"></textarea>
+                        <label style="color:white;">Description(max 1000 characters)</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="1000" style="overflow:auto; resize: none;"></textarea>
                     </div>
                     <br/><br/>
                     <div class="form-group">
@@ -181,7 +183,6 @@ if(isset($_GET['content_type'])){
                                     </div>
                                 </div>
                             </article>
-
                         </div>
                         <!-- End recommendations label -->
 
@@ -191,46 +192,41 @@ if(isset($_GET['content_type'])){
                             <div class="d-flex justify-content">
                                 <label class="align-self-center" style="color:white; margin-right:1%;">Sort:</label> 
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" autocomplete="on" onclick="window.location = 'profile.php?content_type=local';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="local"){echo 'checked';}} ?>>
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" onclick="window.location = 'profile.php?content_type=local';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="local"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option1">Local</label>
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" autocomplete="on" onclick="window.location = 'profile.php?content_type=public';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="public"){echo 'checked';}} ?>>
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" onclick="window.location = 'profile.php?content_type=public';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="public"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option2">Public</label>
                             </div>
                         </form>
+                        <!-- End Recommendations list -->
                         
-                        <!--
-                        <? php
-                            if(isset($_GET['content_type'])){
-                                while($row=mysqli_fetch_array($cafesResult)){
-                        ?>
-                        <div>
-                        <p><? php echo $row['name'];?> </p>
-                        </div>  
-                        <? php }} ?>
-                        -->
-                        
-                        <div id="localContent" class="row gy-4 posts-list"> 
+                        <!-- Cafes list -->
+                        <div id="cafeList" class="row gy-4 posts-list"> 
                             <?php
                             if(isset($_GET['content_type'])){
                                 while($row=mysqli_fetch_array($cafesResult)){
                             ?>
                             <div class="col-lg-6">
                               <article class="d-flex flex-column">
-
-                                <div class="post-img">
-                                  <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+                                  
+                                <div class="row">
+                                    <div class="col">
+                                      <h2 class="title">
+                                        <a href="cafe_details.php"><?php echo $row['name']; ?></a>
+                                      </h2>
+                                    </div>
+                                    
+                                    <div class="col">
+                                      <a class="btn btn-danger float-end" href='delete.php?id=<?php echo $row['id'];?>'>X</a>
+                                    </div>
+                                    
                                 </div>
 
-                                <h2 class="title">
-                                  <a href="blog-details.html"><?php echo $row['name']; ?></a>
-                                </h2>
 
                                 <div class="meta-top">
                                   <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>John Doe</li>
                                   </ul>
                                 </div>
 
@@ -239,14 +235,16 @@ if(isset($_GET['content_type'])){
                                     <?php echo $row['description']; ?>
                                   </p>
                                 </div>
-
+                                  
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="blog-details.html">Read More</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name']; ?>">Details</a>
                                 </div>
 
                               </article>
                             </div>
                             <?php }} ?>
+                        <!-- End Cafes list -->
+                            
                             
                             <!--
                             <div class="col-lg-6">
@@ -319,7 +317,7 @@ if(isset($_GET['content_type'])){
 
                     </div>
 
-                </div>
+                  </div>
 
                 </div>
 
@@ -334,6 +332,7 @@ if(isset($_GET['content_type'])){
 
         
     </div>
+    
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>

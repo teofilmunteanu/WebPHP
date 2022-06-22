@@ -31,8 +31,3 @@ function hideUploadMenuPublic()
     document.getElementById("uploadCover").style.display = 'none';
     document.getElementById("boxPublic").style.display = 'none';
 }
-
-function submit_form()
-{
-    document.getElementById("selectUploadType").submit();
-}
