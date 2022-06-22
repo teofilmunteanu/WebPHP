@@ -1,6 +1,16 @@
 <?php
+require_once 'connection.php';
 session_start();
+
+$cafesSql="SELECT * FROM cafes WHERE uploadType='public';";
+$cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
+
+$email=$_SESSION['email'];
+$userSql="SELECT * FROM users WHERE email='$email';";
+$userResult=mysqli_query($con, $userSql)or die(mysqli_error($con));
+$userType=mysqli_fetch_array($userResult)['userType'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +43,7 @@ session_start();
 
   <!-- Template Main CSS File -->
   <link href="assets/css1/mainstyle7.css" rel="stylesheet">
-
+  
   <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
   * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
@@ -43,270 +53,181 @@ session_start();
 </head>
 
 <body>
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
+    
+    <div class="profileWrapper">
+        <!-- ======= Header ======= -->
+        <header id="header" class="header fixed-top">
+          <div class="container-fluid align-items-center d-flex justify-content-between">
 
+              <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top" data-scrollto-offset="0">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-            <li><a class="active" href="index.php">Coffee Shops</a></li>
-            <li><a class="nav-link" href="profile.php?content_type=local">Profile</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle d-none"></i>
-      </nav>
-        
-      <div>
-        <a class="btn-getstarted" href="logout.php">Log Out</a>
-      </div>
-    </div>
-  </header>
-  <!-- End Header -->
-
-  <main id="main">
-
-    <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row g-5">
-          <div class="col-lg-12">        
-            <div class="row gy-4 posts-list">
-              <!-- Social Media -->  
-              <div class="col-lg-12">
-                    <article class="d-flex justify-content-center flex-column">
-                        <h3 class="title">
-                        Enjoying CaféBook? Like and Share: 
-                        </h3>
-                        <div class="fb-like" data-href="http://www.example1324111.com" data-action="like" data-layout="standard" data-size="small" data-share="true"></div>
-                    </article>
-              </div>    
-              <!-- End Social Media -->  
-
+            <nav id="navbar" class="navbar">
+              <ul>
+                  <li><a class="active" href="index.php">Coffee Shops</a></li>
+                  <li><a class="nav-link" href="profile.php?content_type=local">Profile</a></li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle d-none"></i>
+            </nav>
               
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-                </article>
-                         
-              </div><!-- End post list item -->
-
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-                    
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-
-                </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-
-                </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-
-                </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-5.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      In itaque assumenda aliquam voluptatem qui temporibus iusto nisi quia. Autem vitae quas aperiam nesciunt mollitia tempora odio omnis. Ipsa odit sit ut amet necessitatibus. Quo ullam ut corrupti autem consequuntur totam dolorem.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-
-                </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-6">
-                <article class="d-flex flex-column">
-
-                  <div class="post-img">
-                    <img src="assets/img/blog/blog-6.jpg" alt="" class="img-fluid">
-                  </div>
-
-                  <h2 class="title">
-                    <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
-                  </h2>
-
-                  <div class="meta-top">
-                    <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="content">
-                    <p>
-                      Expedita et temporibus eligendi enim molestiae est architecto praesentium dolores. Illo laboriosam officiis quis. Labore officia quia sit voluptatem nisi est dignissimos totam. Et voluptate et consectetur voluptatem id dolor magni impedit. Omnis dolores sit.
-                    </p>
-                  </div>
-
-                  <div class="read-more mt-auto align-self-end">
-                    <a href="blog-details.html">Read More</a>
-                  </div>
-
-                </article>
-              </div><!-- End post list item -->
-
+            <div>
+              <a class="btn-getstarted" href="logout.php">Log Out</a>
+            </div>
           </div>
+        </header>
+        <!-- End Header -->
+        
 
-          </div>
+        <main id="main">
 
+          <!-- ======= Blog Section ======= -->
+          <section id="blog" class="blog">
+            <div class="container" data-aos="fade-up">
+
+              <div class="row g-5">
+
+                <div class="col-lg-12">
+
+                    <div class="row gy-4 posts-list">
+                        <!-- Social Media -->  
+                        <div class="col-lg-12">
+                            <article class="d-flex justify-content-center flex-column">
+                                <h3 class="title">
+                                Enjoying CaféBook? Like and Share: 
+                                </h3>
+                                <div class="fb-like" data-href="http://www.example1324111.com" data-action="like" data-layout="standard" data-size="small" data-share="true"></div>
+                            </article>
+                        </div>    
+                        <!-- End Social Media -->
+                        
+                        <!-- Cafes list -->
+                        <div id="cafeList" class="row gy-4 posts-list"> 
+                            <?php
+                                while($row=mysqli_fetch_array($cafesResult)){
+                            ?>
+                            <div class="col-lg-6">
+                              <article class="d-flex flex-column">
+                                  
+                                <div class="row">
+                                    <div class="col">
+                                      <h2 class="title">
+                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned']; ?>"><?php echo $row['name']; ?></a>
+                                      </h2>
+                                    </div>
+                                    
+                                    <?php if($userType=='admin'){ ?>
+                                    <div class="col">
+                                      <button type="button" id="<?php echo $row['id'];?>" onclick="selectDelete(this.id)" class="btn btn-danger float-end" data-toggle="modal" data-target="#exampleModalCenter">
+                                        X
+                                      </button>
+                                    </div>
+                                    <?php } ?>
+                                    
+                                </div>
+                                  
+                                <div class="meta-top">
+                                  <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>Post by: <?php echo $row['emailAssigned']; ?></li>
+                                  </ul>
+                                </div>  
+
+                                <div class="content">
+                                  <p>
+                                    <?php echo $row['description']; ?>
+                                  </p>
+                                </div>
+                                  
+                                <div class="read-more mt-auto align-self-end">
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned']; ?>">Details</a>
+                                </div>
+
+                              </article>
+                            </div>
+                            <?php } ?>
+                        
+                        </div>
+                        <!-- End Cafes list -->    
+                        
+                    </div>
+
+                  </div>
+
+                </div>
+
+            </div>
+              
+            <!-- Delete Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure you want to delete this cafe?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('index')">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <!-- End Delete Modal -->
+            
+          </section><!-- End Blog Section -->
+          
+            
+            
+        </main><!-- End #main -->
+
+        <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+        <div id="preloader"></div>
+
+        
+    </div>
+    
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="footer-legal text-center">
+        <div class="container d-flex justify-content-center">
+            
+            <div class="row">
+              <div class="footer-info">
+                <h3>CaféBook</h3>
+                <p>
+                  <strong>Author: </strong>Munteanu Teofil<br>
+                  <strong>Email: </strong>andreiteofil01@gmail.com<br>
+                </p>
+              </div>
+              <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10848.673779342269!2d27.5722978!3d47.1741385!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x95f1e37c73c23e74!2sAlexandru%20Ioan%20Cuza%20University%20of%20Ia%C8%99i!5e0!3m2!1sen!2sro!4v1655924747803!5m2!1sen!2sro" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
         </div>
+      </div>  
+    </footer>
+    <!-- End Footer -->
+    
+    
+    
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
 
-      </div>
-    </section><!-- End Blog Section -->
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-  </main><!-- End main -->
+    <script src="assets/js/scripts.js"></script>
 
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

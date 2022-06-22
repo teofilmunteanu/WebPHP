@@ -1,6 +1,5 @@
 <?php
 require_once 'connection.php';
-$table="users";
 session_start();
 
 if(!isset($_SESSION['email'])){
@@ -8,7 +7,7 @@ if(!isset($_SESSION['email'])){
 }
 else{
     $email = $_SESSION['email'];
-    $nameQuery = "SELECT * FROM $table WHERE email='$email'";
+    $nameQuery = "SELECT * FROM users WHERE email='$email';";
     $res1=mysqli_query($con, $nameQuery);
     $row=mysqli_fetch_array($res1);
     $_SESSION['firstName'] = $row['firstName'];
@@ -90,7 +89,7 @@ if(isset($_GET['content_type'])){
 
         
         <!-- Upload - Page Cover -->
-        <div id="uploadCover"></div>
+        <div id="uploadCover" onclick="hideUploadMenuLocal(), hideUploadMenuPublic()"></div>
         
         <!-- Local Cafe Upload -->
         <div id="boxLocal" class="uploadBoxWrapper">
@@ -187,7 +186,7 @@ if(isset($_GET['content_type'])){
                         <!-- End recommendations label -->
 
                         
-                        <!-- Recommendations list -->
+                        <!-- Upload Type -->
                         <form id="selectUploadType" method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
                             <div class="d-flex justify-content">
                                 <label class="align-self-center" style="color:white; margin-right:1%;">Sort:</label> 
@@ -199,7 +198,7 @@ if(isset($_GET['content_type'])){
                                 <label class="btn btn-secondary" for="option2">Public</label>
                             </div>
                         </form>
-                        <!-- End Recommendations list -->
+                        <!-- End Upload Type -->
                         
                         <!-- Cafes list -->
                         <div id="cafeList" class="row gy-4 posts-list"> 
@@ -213,7 +212,7 @@ if(isset($_GET['content_type'])){
                                 <div class="row">
                                     <div class="col">
                                       <h2 class="title">
-                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>"><?php echo $row['name']; ?></a>
+                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>"><?php echo $row['name']; ?></a>
                                       </h2>
                                     </div>
                                     
@@ -225,13 +224,6 @@ if(isset($_GET['content_type'])){
                                     
                                 </div>
 
-
-                                <div class="meta-top">
-                                  <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>John Doe</li>
-                                  </ul>
-                                </div>
-
                                 <div class="content">
                                   <p>
                                     <?php echo $row['description']; ?>
@@ -239,84 +231,16 @@ if(isset($_GET['content_type'])){
                                 </div>
                                   
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="cafe_details.php?name=<?php echo $row['name']; ?>">Details</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>">Details</a>
                                 </div>
 
                               </article>
                             </div>
                             <?php }} ?>
-                        <!-- End Cafes list -->
-                            
-                            
-                            <!--
-                            <div class="col-lg-6">
-                              <article class="d-flex flex-column">
-
-                                <div class="post-img">
-                                  <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-                                </div>
-
-                                <h2 class="title">
-                                  <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                                </h2>
-
-                                <div class="meta-top">
-                                  <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                                  </ul>
-                                </div>
-
-                                <div class="content">
-                                  <p>
-                                    Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
-                                  </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                  <a href="blog-details.html">Read More</a>
-                                </div>
-
-                              </article>
-                            </div><!-- End post list item -->
-                            
-                            <!--
-                            <div class="col-lg-6">
-                              <article class="d-flex flex-column">
-
-                                <div class="post-img">
-                                  <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-                                </div>
-
-                                <h2 class="title">
-                                  <a href="blog-details.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
-                                </h2>
-
-                                <div class="meta-top">
-                                  <ul>
-                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">John Doe</a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
-                                  </ul>
-                                </div>
-
-                                <div class="content">
-                                  <p>
-                                    Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis.
-                                  </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                  <a href="blog-details.html">Read More</a>
-                                </div>
-
-                              </article>
-                            </div><!-- End post list item -->
-                            
-                            
+                        
                         </div>
-
+                        <!-- End Cafes list -->    
+                        
                     </div>
 
                   </div>
@@ -325,7 +249,7 @@ if(isset($_GET['content_type'])){
 
             </div>
               
-            <!-- Modal -->
+            <!-- Delete Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -337,11 +261,12 @@ if(isset($_GET['content_type'])){
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete('<?php echo $_GET['content_type']; ?>')">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('profile', '<?php echo $_GET['content_type']; ?>')">Delete</button>
                   </div>
                 </div>
               </div>
             </div>  
+            <!-- End Delete Modal -->
             
           </section><!-- End Blog Section -->
           
@@ -355,6 +280,30 @@ if(isset($_GET['content_type'])){
 
         
     </div>
+    
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="footer-legal text-center">
+        <div class="container d-flex justify-content-center">
+            
+            <div class="row">
+              <div class="footer-info">
+                <h3>CaféBook</h3>
+                <p>
+                  <strong>Author: </strong>Munteanu Teofil<br>
+                  <strong>Email: </strong>andreiteofil01@gmail.com<br>
+                </p>
+              </div>
+              <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10848.673779342269!2d27.5722978!3d47.1741385!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x95f1e37c73c23e74!2sAlexandru%20Ioan%20Cuza%20University%20of%20Ia%C8%99i!5e0!3m2!1sen!2sro!4v1655924747803!5m2!1sen!2sro" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+        </div>
+      </div>  
+    </footer>
+    <!-- End Footer -->
+    
+    
     
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

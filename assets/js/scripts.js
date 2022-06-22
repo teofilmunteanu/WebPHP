@@ -1,8 +1,3 @@
-var uploadCover = document.getElementById("uploadCover");
-
-uploadCover.addEventListener("click", hideUploadMenuLocal);
-uploadCover.addEventListener("click", hideUploadMenuPublic);
-
 function refreshCaptcha()
 {
     document.getElementById("captcha").src='captcha.php';
@@ -33,12 +28,13 @@ function hideUploadMenuPublic()
 }
 
 
+
 var idToDelete="";
 
 function selectDelete(id){
     idToDelete = id;
 }
 
-function confirmDelete(lastContentType){
-    window.location.href = "delete.php?id="+idToDelete+"&last_content_type="+lastContentType;
+function confirmDelete(page, lastContentType='public'){
+    window.location.href = "delete.php?id="+idToDelete+"&page="+page+"&last_content_type="+lastContentType;
 }

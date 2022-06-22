@@ -2,11 +2,11 @@
     session_start();
     class PageHandler{
         public static function getHomePage(){
-            return file_get_contents('./indexMain.php');
+            header('Location: indexMain.php');
         }
 
-        public static function getLoggedInPage($userEmail){
-            return file_get_contents('./indexLoggedIn.php');
+        public static function getLoggedInPage(){
+            header('Location: indexLoggedIn.php');
         }
     }
 ?>
@@ -22,15 +22,15 @@
         require_once 'securityHandler.php';
 
         if(isset($_SESSION['email'])){ 
-            echo PageHandler::getLoggedInPage($_COOKIE['email']);
+            PageHandler::getLoggedInPage();
         }else if(isset($_COOKIE['email']) && isset($_COOKIE['token'])){
             if(checkUserToken($_COOKIE['email'], $_COOKIE['token'])){
                 $_SESSION['email'] = $_COOKIE['email'];
-                echo PageHandler::getLoggedInPage($_COOKIE['email']);
+                PageHandler::getLoggedInPage($_COOKIE['email']);
             }  
         }
         else{
-            echo PageHandler::getHomePage();
+            PageHandler::getHomePage();
         }
 
         ?>

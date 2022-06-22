@@ -7,7 +7,7 @@ if(!isset($_SESSION['email'])){
 }
 else
 {
-    $email = $_SESSION['email'];
+    $email = $_GET['email'];//$_SESSION['email'];
     $cafeName = $_GET['name'];
     $cafesSql="SELECT * FROM cafes WHERE name='$cafeName' AND emailAssigned='$email';";
     $cafesResult=mysqli_query($con, $cafesSql)or die(mysqli_error($con));
