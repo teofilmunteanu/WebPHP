@@ -43,11 +43,12 @@ if(isset($_SESSION['email'])){
                             <td><input type="checkbox" name="rememberMe" value="1"></td>
                         </tr>
                         <tr>
-                            <td><img src = "captcha.php" id="captcha"></td>
-                            <td><button type="button" style="margin-left:2%; font-size:24px;" onclick="refreshCaptcha()">
+                            <td><canvas id="captcha" width="100" height="50"></canvas></td>
+                            <td><button type="button" style="margin-left:2%; font-size:24px;" onclick="generateCaptcha()">
                                     <i class="fa fa-refresh"></i>
                                 </button>
                             </td>
+                            <td><input type="hidden" id="captchaVal" name="captchaValue" value=""></td>
                         </tr>
                         <tr>
                             <td>Text in the picture:</td>
@@ -68,5 +69,6 @@ if(isset($_SESSION['email'])){
     </div>
 
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/captchaScript.js"></script>
     </body>
 </html>

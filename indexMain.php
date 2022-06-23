@@ -6,6 +6,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>CaféBook</title>
+        
+        
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -20,11 +22,28 @@
         <!-- Template Main CSS File -->
         <link href="assets/css1/mainstyle7.css" rel="stylesheet">
     </head>
+    
     <body id="page-top">
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
           <div class="container-fluid d-flex align-items-center justify-content-between">
-              <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+            <div>
+                <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                <div>
+                    <div class="row">
+                    <svg width="50" height="20" >
+                        <path d="M 1 8 C 4 1, 6 1, 9 8 S 15 15, 18 8" stroke="black" fill="transparent"/>
+                    </svg>
+                    </div>
+                    <div class="row">
+                        <svg width="50" height="20" >
+                            <circle cx="20" cy="0" r="16" fill="orange"/>
+                            <path d="M 29 11 C 43 11, 43 -2, 35 3" fill="none" stroke="orange" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+                
+            </div>
             <div>
                 <a class="btn-register" href="login.php">Log In</a> <a class="btn-register" href="signup.php">Sign Up</a>
             </div>

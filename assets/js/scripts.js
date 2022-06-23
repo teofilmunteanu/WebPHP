@@ -1,6 +1,7 @@
 function refreshCaptcha()
 {
-    document.getElementById("captcha").src='captcha.php';
+    //document.getElementById("captcha").src='captcha.php';
+    
 }
 
 function showUploadMenuLocal()

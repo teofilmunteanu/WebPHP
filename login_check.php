@@ -5,7 +5,7 @@ session_start();
 $table="users";
 $message="Failed";
 
-if(strtoupper($_POST['captchaAnswer']) == $_SESSION['captchaString']){
+if(strtoupper($_POST['captchaAnswer']) == $_POST['captchaValue']){
     if(($_POST['email'] != "") && ($_POST['password'] != "")){
         $email = $_POST['email'];
         $pass = md5($_POST['password']);
