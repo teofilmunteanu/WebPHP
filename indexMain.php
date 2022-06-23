@@ -27,13 +27,17 @@
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
           <div class="container-fluid d-flex align-items-center justify-content-between">
-            <div>
-                <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
-                <div>
+            <div class="row">
+                <div class="col">
+                    <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                </div>
+                <div class="col">
                     <div class="row">
-                    <svg width="50" height="20" >
-                        <path d="M 1 8 C 4 1, 6 1, 9 8 S 15 15, 18 8" stroke="black" fill="transparent"/>
-                    </svg>
+                        <svg width="50" height="20" >
+                            <path d="M 10 1 C 7 5, 7 6, 11 9 S 13 15, 10 18" stroke="white" fill="transparent"/>
+                            <path d="M 20 1 C 17 5, 17 6, 21 9 S 23 15, 20 18" stroke="white" fill="transparent"/>
+                            <path d="M 30 1 C 27 5, 27 6, 31 9 S 33 15, 30 18" stroke="white" fill="transparent"/>
+                        </svg>
                     </div>
                     <div class="row">
                         <svg width="50" height="20" >

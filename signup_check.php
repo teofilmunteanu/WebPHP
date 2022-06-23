@@ -22,7 +22,7 @@ session_start();
 $table="users";
 $message="Failed";
 
-if(strtoupper($_POST['captchaAnswer1']) == $_SESSION['captchaString']){
+if(strtoupper($_POST['captchaAnswer1']) == $_POST['captchaValue']){
     if(($_POST['email'] != "") && ($_POST['password'] != "")
             && ($_POST['cpassword'] != "") && ($_POST['lastName'] != "")
             && ($_POST['firstName'] != "")){

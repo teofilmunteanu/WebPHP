@@ -39,7 +39,27 @@ else
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
           <div class="container-fluid d-flex align-items-center justify-content-between">
 
-              <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+            <div class="row">
+                <div class="col">
+                    <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <svg width="50" height="20" >
+                            <path d="M 10 1 C 7 5, 7 6, 11 9 S 13 15, 10 18" stroke="white" fill="transparent"/>
+                            <path d="M 20 1 C 17 5, 17 6, 21 9 S 23 15, 20 18" stroke="white" fill="transparent"/>
+                            <path d="M 30 1 C 27 5, 27 6, 31 9 S 33 15, 30 18" stroke="white" fill="transparent"/>
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <svg width="50" height="20" >
+                            <circle cx="20" cy="0" r="16" fill="orange"/>
+                            <path d="M 29 11 C 43 11, 43 -2, 35 3" fill="none" stroke="orange" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+                
+            </div>
 
             <nav id="navbar" class="navbar">
               <ul>
