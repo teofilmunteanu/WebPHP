@@ -4,6 +4,7 @@ body{
 
 .profileWrapper{
     position: relative;
+    padding-bottom: 10vh;
 }
 
 #uploadCover{

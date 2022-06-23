@@ -1,10 +1,11 @@
 <?php
 class User{
-    public $email;
-    public $pass;
-    public $lastName;
-    public $firstName;
-    public $userType;
+    private $email;
+    private $pass;
+    private $lastName;
+    private $firstName;
+    private $userType;
+    
     function __construct(){
         $this->userType = "normal";
     }
@@ -14,6 +15,10 @@ class User{
         $this->pass = $p;
         $this->lastName = $ln;
         $this->firstName = $fn;
+    }
+    
+    public function getData(){
+        return array($this->email, $this->pass, $this->lastName, $this->firstName, $this->userType);
     }
 }
 
@@ -36,8 +41,11 @@ if(strtoupper($_POST['captchaAnswer1']) == $_POST['captchaValue']){
 
                     $user = new User();
                     $user->setData($_POST['email'], md5($_POST['password']), $_POST['lastName'], $_POST['firstName']);
-                    $query="INSERT INTO $table(email, password, lastName, firstName, userType) VALUES ('{$user->email}', '{$user->pass}', '{$user->lastName}', '{$user->firstName}', '{$user->userType}')";
+                    
+                    $values  = implode("', '", $user->getData());
+                    $query= "INSERT INTO $table (email, password, lastName, firstName, userType) VALUES ('$values')";
                     $result=mysqli_query($con, $query);
+                    
                     $message = "Success";
 
                     header('location: index.php');  

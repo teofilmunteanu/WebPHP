@@ -14,7 +14,7 @@ if(strtoupper($_POST['captchaAnswer']) == $_POST['captchaValue']){
         
         if(mysqli_num_rows($result) == 1){
             if(isset($_POST['rememberMe'])){
-                addToken($email);
+                SecurityHandler::addToken($email);
             }
 
             $message = "Success";
