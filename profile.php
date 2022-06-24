@@ -72,7 +72,7 @@ if(isset($_GET['content_type'])){
 
             <div class="row">
                 <div class="col">
-                    <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                    <h1><a href = "index.php" onclick="saveAudioTime()">CaféBook</a><span>.</span></h1>
                 </div>
                 <div class="col">
                     <div class="row">
@@ -94,8 +94,8 @@ if(isset($_GET['content_type'])){
 
             <nav id="navbar" class="navbar">
               <ul>
-                  <li><a class="nav-link" href="index.php">Coffee Shops</a></li>
-                  <li><a class="active" href="profile.php?content_type=local">Profile</a></li>
+                  <li><a class="nav-link" href="index.php" onclick="saveAudioTime()">Coffee Shops</a></li>
+                  <li><a class="active" href="profile.php?content_type=local" onclick="saveAudioTime()">Profile</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav>
@@ -107,6 +107,21 @@ if(isset($_GET['content_type'])){
         </header>
         <!-- End Header -->
 
+        
+        <!-- Music Controller -->
+        <audio id="music" autoplay loop>
+            <source src="assets/audio/Ichika_Nito_Felling.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="musicOptions">
+            <button class="btn" onclick="toggleMusicOptions()"><i class="bi bi-music-note-beamed"></i></button>
+        </div>
+        
+        <div id="musicController">
+            <input type="range" orient="vertical"  min="0" max="1" step="0.1" id="volume" onchange="setVolume(this.value);"> 
+        </div>
+        <!-- End Music Controller -->
+        
         
         <!-- Upload - Page Cover -->
         <div id="uploadCover" onclick="hideUploadMenuLocal(), hideUploadMenuPublic()"></div>
@@ -205,16 +220,31 @@ if(isset($_GET['content_type'])){
                         </div>
                         <!-- End recommendations label -->
 
+                        <!-- Tutorial Video -->
+                        <div class="col-lg-12">
+                            <article class="d-flex justify-content-center flex-column">
+                                <div class="col-lg-2 align-self-center">
+                                    <button class="btn-add" onclick="showTutorial()">Show Tutorial</button>
+                                </div>
+                                <br/>
+                                <div id="videoContainer" class="row align-self-center">
+                                    <video width="500" height="500" controls>
+                                        <source src="assets/video/Tutorial.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </article>
+                        </div>
+                        <!-- End Tutorial Video -->
                         
                         <!-- Upload Type -->
                         <form id="selectUploadType" method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
                             <div class="d-flex justify-content">
                                 <label class="align-self-center" style="color:white; margin-right:1%;">Sort:</label> 
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" onclick="window.location = 'profile.php?content_type=local';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="local"){echo 'checked';}} ?>>
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option1" value="local" onclick="saveAudioTime(), window.location = 'profile.php?content_type=local';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="local"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option1">Local</label>
 
-                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" onclick="window.location = 'profile.php?content_type=public';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="public"){echo 'checked';}} ?>>
+                                <input type="radio" class="btn-check" name="uploadTypeRadio" id="option2" value="public" onclick="saveAudioTime(), window.location = 'profile.php?content_type=public';" <?php if(isset($_GET['content_type'])){if($_GET['content_type']=="public"){echo 'checked';}} ?>>
                                 <label class="btn btn-secondary" for="option2">Public</label>
                             </div>
                         </form>
@@ -251,7 +281,7 @@ if(isset($_GET['content_type'])){
                                 </div>
                                   
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>">Details</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>" onclick="saveAudioTime()">Details</a>
                                 </div>
 
                               </article>
@@ -335,8 +365,8 @@ if(isset($_GET['content_type'])){
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/mediaScripts.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

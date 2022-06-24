@@ -41,7 +41,7 @@ else
 
             <div class="row">
                 <div class="col">
-                    <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                    <h1><a href = "index.php" onclick="saveAudioTime()">CaféBook</a><span>.</span></h1>
                 </div>
                 <div class="col">
                     <div class="row">
@@ -63,8 +63,8 @@ else
 
             <nav id="navbar" class="navbar">
               <ul>
-                  <li><a class="nav-link" href="index.php">Coffee Shops</a></li>
-                  <li><a class="nav-link" href="profile.php?content_type=local">Profile</a></li>
+                  <li><a class="nav-link" href="index.php" onclick="saveAudioTime()">Coffee Shops</a></li>
+                  <li><a class="nav-link" href="profile.php?content_type=local" onclick="saveAudioTime()">Profile</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav>
@@ -75,6 +75,22 @@ else
           </div>
         </header>
         <!-- End Header -->
+        
+        
+        <!-- Music Controller -->
+        <audio id="music" autoplay loop>
+            <source src="assets/audio/Ichika_Nito_Felling.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="musicOptions">
+            <button class="btn" onclick="toggleMusicOptions()"><i class="bi bi-music-note-beamed"></i></button>
+        </div>
+        
+        <div id="musicController">
+            <input type="range" orient="vertical"  min="0" max="1" step="0.1" id="volume" onchange="setVolume(this.value);"> 
+        </div>
+        <!-- End Music Controller -->
+        
         
         <main id="main">
 
@@ -181,5 +197,6 @@ else
         
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/mediaScripts.js"></script>
     </body>
 </html>

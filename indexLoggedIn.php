@@ -61,7 +61,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
 
             <div class="row">
                 <div class="col">
-                    <h1><a href = "index.php">CaféBook</a><span>.</span></h1>
+                    <h1><a href = "index.php" onclick="saveAudioTime()">CaféBook</a><span>.</span></h1>
                 </div>
                 <div class="col">
                     <div class="row">
@@ -83,8 +83,8 @@ $userType=mysqli_fetch_array($userResult)['userType'];
 
             <nav id="navbar" class="navbar">
               <ul>
-                  <li><a class="active" href="index.php">Coffee Shops</a></li>
-                  <li><a class="nav-link" href="profile.php?content_type=local">Profile</a></li>
+                  <li><a class="active" href="index.php" onclick="saveAudioTime()">Coffee Shops</a></li>
+                  <li><a class="nav-link" href="profile.php?content_type=local" onclick="saveAudioTime()">Profile</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav>
@@ -96,6 +96,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
         </header>
         <!-- End Header -->
         
+        
         <!-- Music Controller -->
         <audio id="music" autoplay loop>
             <source src="assets/audio/Ichika_Nito_Felling.mp3" type="audio/mpeg">
@@ -106,8 +107,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
         </div>
         
         <div id="musicController">
-            <label for="volume" class="form-label">Music Volume</label>
-            <input type="range" class="form-range" min="0" max="1" step="0.1" id="volume" onchange="setVolume(this.value);"> 
+            <input type="range" orient="vertical"  min="0" max="1" step="0.1" id="volume" onchange="setVolume(this.value);"> 
         </div>
         <!-- End Music Controller -->
         
@@ -256,7 +256,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/musicScripts.js"></script>
+    <script src="assets/js/mediaScripts.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

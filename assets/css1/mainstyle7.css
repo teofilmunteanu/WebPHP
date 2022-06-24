@@ -2,6 +2,13 @@ body{
     background-color: rgba(92, 77, 66, 0.8);
 }
 
+
+
+#videoContainer{
+    display: none;
+}
+
+
 #musicOptions{
     position: fixed;
     margin-top:100px;
@@ -14,8 +21,6 @@ body{
 #musicController{
     position: fixed;
     margin-top:140px;
-    height:auto;
-    width:150px;
     padding:10px;
     background-color: white;
     
@@ -28,10 +33,19 @@ body{
     transition: transform 0.5s;
 }
 
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* Chromium */
+    height:180px;
+    width:20px;
+}
+
+
 
 .profileWrapper{
     position: relative;
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
 }
 
 #uploadCover{
