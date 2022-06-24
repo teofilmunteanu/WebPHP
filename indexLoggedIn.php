@@ -27,8 +27,6 @@ $userType=mysqli_fetch_array($userResult)['userType'];
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -54,7 +52,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
 
 <body>
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v14.0" nonce="FzuMjXYX"></script>
     
     <div class="profileWrapper">
         <!-- ======= Header ======= -->
@@ -98,13 +96,27 @@ $userType=mysqli_fetch_array($userResult)['userType'];
         </header>
         <!-- End Header -->
         
-
+        <!-- Music Controller -->
+        <audio id="music" autoplay loop>
+            <source src="assets/audio/Ichika_Nito_Felling.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="musicOptions">
+            <button class="btn" onclick="toggleMusicOptions()"><i class="bi bi-music-note-beamed"></i></button>
+        </div>
+        
+        <div id="musicController">
+            <label for="volume" class="form-label">Music Volume</label>
+            <input type="range" class="form-range" min="0" max="1" step="0.1" id="volume" onchange="setVolume(this.value);"> 
+        </div>
+        <!-- End Music Controller -->
+        
+        
         <main id="main">
-
           <!-- ======= Blog Section ======= -->
           <section id="blog" class="blog">
-            <div class="container" data-aos="fade-up">
-
+            <div class="container" data-aos="fade-up">   
+                
               <div class="row g-5">
 
                 <div class="col-lg-12">
@@ -243,8 +255,8 @@ $userType=mysqli_fetch_array($userResult)['userType'];
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
     <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/musicScripts.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

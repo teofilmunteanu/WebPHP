@@ -1,8 +1,3 @@
-function refreshCaptcha()
-{
-    //document.getElementById("captcha").src='captcha.php';
-    
-}
 
 function showUploadMenuLocal()
 {
@@ -39,3 +34,4 @@ function selectDelete(id){
 function confirmDelete(page, lastContentType='public'){
     window.location.href = "delete.php?id="+idToDelete+"&page="+page+"&last_content_type="+lastContentType;
 }
+

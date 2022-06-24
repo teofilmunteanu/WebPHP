@@ -2,6 +2,33 @@ body{
     background-color: rgba(92, 77, 66, 0.8);
 }
 
+#musicOptions{
+    position: fixed;
+    margin-top:100px;
+    height:auto;
+    width:auto;
+    border-radius: 0px 30px 30px 0px;
+    background-color: white;
+}
+
+#musicController{
+    position: fixed;
+    margin-top:140px;
+    height:auto;
+    width:150px;
+    padding:10px;
+    background-color: white;
+    
+    transform: translateX(-300px);
+    transition: transform 0.5s;
+}
+
+#musicController.show{
+    transform: translateX(0px);
+    transition: transform 0.5s;
+}
+
+
 .profileWrapper{
     position: relative;
     padding-bottom: 10vh;
