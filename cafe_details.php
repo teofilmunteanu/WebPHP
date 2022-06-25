@@ -104,7 +104,7 @@ else
                   <div class="row gy-4 posts-list"> 
 
                     <div class="col-lg-12">
-                      <article class="d-flex flex-column">
+                      <article>
                         <div class="container">
                             <div class="row">
                               <div class="col">
@@ -135,8 +135,17 @@ else
                                   </div>
                                 </div>
                               </div>
+                                
                               <div class="col">
-                                <img src ="<?php echo $row['image']; ?>" style='float:right; height: 70%; width: 70%;'>
+                                <div class="row d-flex justify-content-center">
+                                  <img src ="<?php echo $row['image']; ?>" style='float:right; height: 70%; width: 70%;'>
+                                </div>
+                                <br/>
+                                <div class="row row d-flex justify-content-center">
+                                    <div class="col-lg-2">
+                                        <button class="btn-add">Edit</button>
+                                    </div> 
+                                </div>
                               </div>
                             </div>
                         </div>
