@@ -92,6 +92,72 @@ else
         <!-- End Music Controller -->
         
         
+        <!-- Upload - Page Cover -->
+        <div id="uploadCover" onclick="hideUploadMenuLocal(), hideUploadMenuPublic()"></div>
+        
+        <!-- Local Cafe Upload -->
+        <div id="boxLocal" class="uploadBoxWrapper">
+            <div class="uploadBox d-flex justify-content-center">
+                <button type="button" class="btn btn-close" onclick="hideUploadMenuLocal()" style="position: fixed; top:0; right:0;"></button>
+                <form method="post" action="uploadCafe.php" enctype="multipart/form-data" class="d-flex justify-content-center flex-column">
+                    <input type="hidden" name="upload_type" value="local">
+                    <div class="form-group">
+                        <label style="color:white;">Name</label>
+                        <input class="form-control" type="text" name="cafe_name">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Location(search terms)</label>
+                        <input class="form-control" type="text" name="cafe_location">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Description(max 1000 characters)</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="1000" style="overflow:auto; resize: none;"></textarea>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label style="color:white;">Upload Photo</label>
+                        <input class="form-control" type="file" name="image">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn" style="color:white; background-color:darkgrey;">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Public Cafe Upload -->
+        <div id="boxPublic" class="uploadBoxWrapper">
+            <div class="uploadBox d-flex justify-content-center">
+                <button type="button" class="btn btn-close" onclick="hideUploadMenuPublic()" style="position: fixed; top:0; right:0;"></button>
+                <form method="post" action="uploadCafe.php" enctype="multipart/form-data" class="d-flex justify-content-center flex-column">
+                    <input type="hidden" name="upload_type" value="public">
+                    <div class="form-group">
+                        <label style="color:white;">Name</label>
+                        <input class="form-control" type="text" name="cafe_name">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Location(search terms)</label>
+                        <input class="form-control" type="text" name="cafe_location">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:white;">Description(max 1000 characters)</label>
+                        <textarea class="form-control" name="cafe_description" rows="3" maxlength="1000" style="overflow:auto; resize: none;"></textarea>
+                    </div>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label style="color:white;">Link to an image</label><br/>
+                        <input type="url" name="image">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn" style="color:white; background-color:darkgrey;">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        
         <main id="main">
 
           <!-- ======= Blog Section ======= -->
@@ -140,10 +206,18 @@ else
                                 <div class="row d-flex justify-content-center">
                                   <img src ="<?php echo $row['image']; ?>" style='float:right; height: 70%; width: 70%;'>
                                 </div>
-                                <br/>
+                                <br/><br/>
                                 <div class="row row d-flex justify-content-center">
                                     <div class="col-lg-2">
-                                        <button class="btn-add">Edit</button>
+                                        <button class="btn-add" onclick="
+                                            <?php if($_GET['type']=="public"){
+                                                echo "showUploadMenuPublic()";
+                                            }
+                                            else if($_GET['type']=="local"){
+                                                echo "showUploadMenuLocal()";
+                                            }
+                                            ?>
+                                        ">Edit</button>
                                     </div> 
                                 </div>
                               </div>
@@ -207,5 +281,6 @@ else
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
         <script src="assets/js/mediaScripts.js"></script>
+        <script src="assets/js/scripts.js"></script>
     </body>
 </html>

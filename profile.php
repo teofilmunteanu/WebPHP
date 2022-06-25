@@ -262,7 +262,7 @@ if(isset($_GET['content_type'])){
                                 <div class="row">
                                     <div class="col">
                                       <h2 class="title">
-                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>"><?php echo $row['name']; ?></a>
+                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>&type=<?php echo $row['uploadType'];?>"><?php echo $row['name'];?></a>
                                       </h2>
                                     </div>
                                     
@@ -281,7 +281,7 @@ if(isset($_GET['content_type'])){
                                 </div>
                                   
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>" onclick="saveAudioTime()">Details</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $_SESSION['email']?>&type=<?php echo $row['uploadType'];?>" onclick="saveAudioTime()">Details</a>
                                 </div>
 
                               </article>

@@ -171,7 +171,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
                                 </div>
                                   
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned']; ?>">Details</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned'];?>&type=<?php echo $row['uploadType'];?>">Details</a>
                                 </div>
 
                               </article>
