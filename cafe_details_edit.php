@@ -235,9 +235,9 @@ else
                                     <br/><br/>
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-lg-2">
-                                            <input type="submit" class="btn-add" name="update" value="Update">
+                                            <input type="submit" class="btn-add" name="update" value="Update" onclick="saveAudioTime()">
                                             <br><br>
-                                            <input type="submit" class="btn-add" name="discard" value="Discard">
+                                            <input type="submit" class="btn-add" name="discard" value="Discard" onclick="saveAudioTime()">
                                         </div> 
                                     </div>
                                   </div>

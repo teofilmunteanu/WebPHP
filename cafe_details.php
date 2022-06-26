@@ -149,7 +149,7 @@ else
                                 <?php if($currentUser == $email || $userType== "admin") {?>
                                 <div class="row row d-flex justify-content-center">
                                     <div class="col-lg-2">
-                                        <a class="btn-add" href="cafe_details_edit.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned'];?>&type=<?php echo $row['uploadType'];?>" style="color:white;">Edit</a>
+                                        <a class="btn-add" href="cafe_details_edit.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned'];?>&type=<?php echo $row['uploadType'];?>" style="color:white;" onclick="saveAudioTime()">Edit</a>
                                     </div> 
                                 </div>
                                 <?php } ?>

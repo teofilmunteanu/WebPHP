@@ -144,7 +144,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
                                 <div class="row">
                                     <div class="col">
                                       <h2 class="title">
-                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned']; ?>"><?php echo $row['name']; ?></a>
+                                        <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned']; ?>" onclick="saveAudioTime()"><?php echo $row['name']; ?></a>
                                       </h2>
                                     </div>
                                     
@@ -171,7 +171,7 @@ $userType=mysqli_fetch_array($userResult)['userType'];
                                 </div>
                                   
                                 <div class="read-more mt-auto align-self-end">
-                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned'];?>&type=<?php echo $row['uploadType'];?>">Details</a>
+                                  <a href="cafe_details.php?name=<?php echo $row['name'];?>&email=<?php echo $row['emailAssigned'];?>&type=<?php echo $row['uploadType'];?>" onclick="saveAudioTime()">Details</a>
                                 </div>
 
                               </article>
