@@ -89,7 +89,7 @@ input[type=range][orient=vertical]
     transform: translate(-50%, -50%);
 }
 
-button.btn-add{
+.btn-add{
     color: var(--color-white);
     display: inline-block;
     padding: 8px 30px;
