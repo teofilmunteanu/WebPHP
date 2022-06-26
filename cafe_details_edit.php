@@ -29,7 +29,7 @@ else
         }
         else{
             if($uploadType == "local"){
-                if($_POST['image']!=""){
+                if(isset($_FILES['image']) && $_FILES['image']['error'] != UPLOAD_ERR_NO_FILE){
                     $target="./images/".basename($_FILES['image']['name']);
 
                     if (!file_exists('./images/')) {
@@ -55,6 +55,7 @@ else
                     } 
                 }else{
                     $target=$row['image'];
+                    move_uploaded_file($_FILES['image']['tmp_name'],$target);
                 }  
             }
             else if($uploadType == "public"){
